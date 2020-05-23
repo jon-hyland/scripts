@@ -10,12 +10,17 @@ fi
 # break on error
 set -e
 
+# vars
+HOME="/home/pi"
+GIT_USER="John Hyland"
+GIT_EMAIL="jonhyland@hotmail.com"
+
 # configure bash profile
 echo "Configuring bash profile.."
-sudo -u pi echo "" >> /home/pi/.profile
-sudo -u pi echo "alias la='ls -alF'" >> /home/pi/.profile
-sudo -u pi echo "alias ll='ls -lF'" >> /home/pi/.profile
-sudo -u pi source /home/pi/.profile
+ALIAS_LL="alias ll='ls -lF'"
+ALIAS_LA="alias la='ls -alF'"
+grep -qxF "$ALIAS_LL" $HOME/.profile || echo "$ALIAS_LL" >> $HOME/.profile
+grep -qxF "$ALIAS_LA" $HOME/.profile || echo "$ALIAS_LA" >> $HOME/.profile
 
 # update and upgrade packages
 echo "Updating and upgrading system.."
@@ -31,20 +36,24 @@ fi
 
 # configure git
 echo "Configuring Git.."
-sudo -u pi git config --global user.name "John Hyland"
-sudo -u pi git config --global user.email "jonhyland@hotmail.com"
+sudo -u pi git config --global user.name "$GIT_USER"
+sudo -u pi git config --global user.email "$GIT_EMAIL"
 sudo -u pi git config --global credential.helper "cache --timeout=3600"
-sudo -u pi mkdir -p /home/pi/git/
+sudo -u pi mkdir -p $HOME/git/
 
 # clone (or pull) 'scripts' repo
-if [ ! -d "/home/pi/git/scripts" ]
+if [ ! -d "$HOME/git/scripts" ]
 then
     echo "Cloning 'scripts' repository.."
-    sudo -u pi git clone "https://github.com/jon-hyland/scripts.git" "/home/pi/git/scripts/"
+    sudo -u pi git clone "https://github.com/jon-hyland/scripts.git" "$HOME/git/scripts/"
 else
     echo "Pulling 'scripts' repository.."
-    sudo -u pi git -C "/home/pi/git/scripts" pull
+    sudo -u pi git -C "$HOME/git/scripts" pull
 fi
+
+# grant execution on scripts
+echo "Granting execution on scripts.."
+sudo -u pi chmod +x $HOME/git/scripts/*.sh
 
 # success
 echo "Operation success"
