@@ -31,7 +31,7 @@ ln -sf /usr/share/dotnet/dotnet /usr/bin/dotnet
 
 # clean up download
 echo 'Removing download file..'
-rm dotnet.tar.gz
+rm $HOME/dotnet.tar.gz
 
 # success
 echo "Operation success"
