@@ -10,6 +10,13 @@ fi
 # break on error
 set -e
 
+# configure bash profile
+echo "Configuring bash profile.."
+sudo -u pi echo "" >> /home/pi/.profile
+sudo -u pi echo "alias la='ls -alF'" >> /home/pi/.profile
+sudo -u pi echo "alias ll='ls -lF'" >> /home/pi/.profile
+sudo -u pi source /home/pi/.profile
+
 # update and upgrade packages
 echo "Updating and upgrading system.."
 apt-get update
