@@ -1,0 +1,49 @@
+=====================================
+ RASPBIAN LITE 'BUSTER' - BASE IMAGE
+=====================================
+
+Changes from stock image:
+
+  1.  Changed charset and keyboard locales from GB to US.
+  2.  Set timezone to US/Pacific/LA.
+  3.  Set Wi-Fi country to US.
+  4.  Changed hostname to 'rpi'.
+  5.  Changed password to server standard.
+  6.  Configured Wi-Fi to connect to 'TACOS-5G'.
+  7.  Upgraded system packages to latest (5/2020).
+  8.  Enabled SSH.
+  9.  Preloaded 'bootstrap.sh' (but not run).
+  10. Included this file.
+  
+
+Included files:
+
+  ~/bootstrap.sh:  
+    * Configures bash profile aliases.
+    * Installs and configures Git.
+    * Clones latest 'scripts' repository.
+	
+  ~/git/scripts/install_dotnet_31.sh  
+    * Downloads .NET Core 3.1 LTS.
+	* Extracts and installs to global location.
+	* Creates appropriate symlinks.
+	
+  ~/git/scripts/install_gameserver.sh  
+   * Clones latest 'games' repository.
+   * Runs latest '~/git/games/scripts/publish_gameserver.sh' script.
+   
+  ~/git/scripts/install_gameserver.sh  
+   * Clones latest 'games' repository.
+   * Runs latest '~/git/games/scripts/publish_gameserver.sh' script.
+
+
+To install GameServer:
+	
+  1. Expand filesystem (!!) with 'sudo raspi-config' -> Advanced Options -> Expand File System
+  2. sudo ./bootstrap.sh; sudo ./git/scripts/install_dotnet_31.sh; sudo ./git/scripts/install_gameserver.sh
+	
+
+To install Rpi.Dns:
+
+  1. Expand filesystem (!!) with 'sudo raspi-config' -> Advanced Options -> Expand File System
+  2. sudo ./bootstrap.sh; sudo ./git/scripts/install_dotnet_31.sh; sudo ./git/scripts/install_rpidns.sh

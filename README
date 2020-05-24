@@ -1,3 +1,0 @@
-bootstrap_get_scripts.sh - Installs Git, creates '~/git' folder, clones 'scripts' repo
-install_dotnet_31.sh - Globally installs .NET Core 3.1 LTS
-install_gameserver.sh - Clones 'games' repo, runs its latest publish script.
