@@ -23,16 +23,16 @@ Included files:
     * Installs and configures Git.
     * Clones latest 'scripts' repository.
 	
-  ~/git/scripts/install_dotnet_31.sh  
+  ~/git/scripts/install_dotnet_31.sh
     * Downloads .NET Core 3.1 LTS.
 	* Extracts and installs to global location.
 	* Creates appropriate symlinks.
 	
-  ~/git/scripts/install_gameserver.sh  
+  ~/git/scripts/install_gameserver.sh
    * Clones latest 'games' repository.
    * Runs latest '~/git/games/scripts/publish_gameserver.sh' script.
    
-  ~/git/scripts/install_gameserver.sh  
+  ~/git/scripts/install_gameserver.sh
    * Clones latest 'games' repository.
    * Runs latest '~/git/games/scripts/publish_gameserver.sh' script.
 
