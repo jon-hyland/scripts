@@ -12,10 +12,11 @@ set -e
 
 # vars
 HOME="/home/pi"
+USER="pi"
 
 # download package
 echo "Downloading .NET Core 3.1 SDK.."
-sudo -u pi wget -nv https://download.visualstudio.microsoft.com/download/pr/f2e1cb4a-0c70-49b6-871c-ebdea5ebf09d/acb1ea0c0dbaface9e19796083fe1a6b/dotnet-sdk-3.1.300-linux-arm.tar.gz -O $HOME/dotnet.tar.gz
+sudo -u $USER wget -nv https://download.visualstudio.microsoft.com/download/pr/f2e1cb4a-0c70-49b6-871c-ebdea5ebf09d/acb1ea0c0dbaface9e19796083fe1a6b/dotnet-sdk-3.1.300-linux-arm.tar.gz -O $HOME/dotnet.tar.gz
 
 # create global folder
 echo "Creating folder '/usr/share/dotnet'.."

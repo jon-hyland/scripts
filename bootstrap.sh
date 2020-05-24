@@ -12,6 +12,7 @@ set -e
 
 # vars
 HOME="/home/pi"
+USER="pi"
 GIT_USER="John Hyland"
 GIT_EMAIL="jonhyland@hotmail.com"
 
@@ -36,24 +37,29 @@ fi
 
 # configure git
 echo "Configuring Git.."
-sudo -u pi git config --global user.name "$GIT_USER"
-sudo -u pi git config --global user.email "$GIT_EMAIL"
-sudo -u pi git config --global credential.helper "cache --timeout=3600"
-sudo -u pi mkdir -p $HOME/git/
+sudo -u $USER git config --global user.name "$GIT_USER"
+sudo -u $USER git config --global user.email "$GIT_EMAIL"
+sudo -u $USER git config --global credential.helper "cache --timeout=3600"
+sudo -u $USER mkdir -p $HOME/git/
 
 # clone (or pull) 'scripts' repo
 if [ ! -d "$HOME/git/scripts" ]
 then
     echo "Cloning 'scripts' repository.."
-    sudo -u pi git clone "https://github.com/jon-hyland/scripts.git" "$HOME/git/scripts/"
+    sudo -u $USER git clone "https://github.com/jon-hyland/scripts.git" "$HOME/git/scripts/"
 else
     echo "Pulling 'scripts' repository.."
-    sudo -u pi git -C "$HOME/git/scripts" pull
+    sudo -u $USER git -C "$HOME/git/scripts" pull
 fi
+
+# copy scripts
+echo "Copying scripts.."
+sudo -u $USER mkdir -p $HOME/scripts/
+sudo -u $USER cp $HOME/git/scripts/*.sh $HOME/scripts/
 
 # grant execution on scripts
 echo "Granting execution on scripts.."
-sudo -u pi chmod +x $HOME/git/scripts/*.sh
+sudo -u $USER chmod +x $HOME/scripts/*.sh
 
 # success
 echo "Operation success"

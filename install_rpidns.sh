@@ -12,21 +12,27 @@ set -e
 
 # vars
 HOME="/home/pi"
+USER="pi"
 
 # clone (or pull) 'rpi' repo
 if [ ! -d "$HOME/git/rpi" ]
 then
     echo "Cloning 'rpi' repository.."
-    sudo -u pi git clone "https://github.com/jon-hyland/rpi.git" "$HOME/git/rpi/"
+    sudo -u $USER git clone "https://github.com/jon-hyland/rpi.git" "$HOME/git/rpi/"
 else
     echo "Pulling 'rpi' repository.."
-    sudo -u pi git -C "$HOME/git/rpi" pull
+    sudo -u $USER git -C "$HOME/git/rpi" pull
 fi
+
+# copy scripts
+echo "Copying scripts.."
+sudo -u $USER mkdir -p $HOME/scripts/
+sudo -u $USER cp $HOME/git/rpi/scripts/*.sh $HOME/scripts/
 
 # grant execution on scripts
 echo "Granting execution on scripts.."
-sudo -u pi chmod +x $HOME/git/rpi/scripts/*.sh
+sudo -u $USER chmod +x $HOME/scripts/*.sh
 
 # run latest installation scripts
-/bin/bash $HOME/git/rpi/scripts/install_dnsmasq.sh
-/bin/bash $HOME/git/rpi/scripts/publish_rpidns.sh
+/bin/bash $HOME/scripts/install_dnsmasq.sh
+/bin/bash $HOME/scripts/publish_rpidns.sh
