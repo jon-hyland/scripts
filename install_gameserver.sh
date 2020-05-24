@@ -27,10 +27,5 @@ fi
 echo "Granting execution on scripts.."
 sudo -u pi chmod +x $HOME/git/games/scripts/*.sh
 
-# copy control scripts
-echo "Copying control scripts.."
-sudo -u pi git $HOME/git/games/scripts/publish_gameserver.sh $HOME/publish_gameserver.sh
-sudo -u pi git $HOME/git/games/scripts/restart_gameserver.sh $HOME/restart_gameserver.sh
-
 # run latest publish script
 /bin/bash $HOME/git/games/scripts/publish_gameserver.sh
