@@ -29,6 +29,8 @@ sudo ufw allow 22
 sudo ufw limit ssh/tcp  # limit 6 attempts per ip per 30 seconds
 echo "Alowing HTTP port 80.."
 sudo ufw allow 80
+echo "Alowing HTTP port 443.."
+sudo ufw allow 443
 
 # install fail2ban (intrusion detection / prevention)
 if [ $(dpkg-query -W -f='${Status}' fail2ban 2>/dev/null | grep -c "ok installed") -eq 0 ]
